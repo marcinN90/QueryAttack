@@ -77,7 +77,7 @@
                     <Slider Margin="0 5" Value="{Binding Interval}" Maximum="1000"></Slider>
                     <Button Content="Start Attack" Command="{Binding ExecuteCommand}"/>
                     <TextBlock Text="{Binding executedCounter}" />
-                    <TextBlock Text="{Binding attackStatus.AttackCounter}" />
+                    <TextBlock Text="{Binding attackStatus.CounterOfCompletedQueries}" />
                     <ListBox x:Name="listThreads"></ListBox>
                 </StackPanel>
             </Border>

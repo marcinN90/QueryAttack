@@ -69,7 +69,7 @@ namespace QueryAttack.ViewModel
                 SqlCommand comm = new SqlCommand(QueryText, conn);
                 comm.ExecuteNonQuery();
                 executedCounter = i;
-                _attackStatus.AttackCounter += 1;
+                _attackStatus.CounterOfCompletedQueries += 1;
             }
         }
         public void CreateConnectionString()
@@ -119,7 +119,7 @@ namespace QueryAttack.ViewModel
         public MainWindowViewModel()
         {
             _attackStatus  = new AttackStatus();
-            attackStatus.AttackCounter = 10;
+           // attackStatus.CounterOfCompletedQueries = 0;
 
             query = new Query();
             this.Interval = 10;

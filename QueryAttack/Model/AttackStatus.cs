@@ -9,17 +9,17 @@ namespace QueryAttack.Model
 {
     public class AttackStatus : INotifyPropertyChanged
     {
-        private int _AttackCounter = 10;
-        public int AttackCounter
+        private int _CounterOfCompletedQueries;
+        public int CounterOfCompletedQueries
         {
             get
             {
-                return _AttackCounter;
+                return _CounterOfCompletedQueries;
             }
             set
             {
-                _AttackCounter = value;
-                OnPropertyChanged("AttackCounter");       
+                _CounterOfCompletedQueries = value;
+                OnPropertyChanged("CounterOfCompletedQueries");       
             }
         }
 
