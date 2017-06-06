@@ -28,3 +28,6 @@ D:\marcin\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\View\MainWindo
 D:\marcin\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.g.resources
 D:\marcin\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.Properties.Resources.resources
 D:\marcin\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.csproj.GenerateResource.Cache
+D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\bin\Debug\QueryAttack.exe.config
+D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.exe
+D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.pdb
