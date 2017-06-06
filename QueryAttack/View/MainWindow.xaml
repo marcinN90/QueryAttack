@@ -1,0 +1,89 @@
+﻿<Window x:Class="QueryAttack.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QueryAttack"
+        xmlns:vm="clr-namespace:QueryAttack.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="700">
+    <Window.Resources>
+        <vm:MainWindowViewModel x:Key="viewModel" />
+    </Window.Resources>
+    <Border BorderThickness="5 0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Connection Panel -->
+            <StackPanel Grid.Column="0">
+
+                <!-- Connection Properties -->
+                <StackPanel>
+                    <TextBlock Margin="0 5" FontWeight="Bold"
+                                Text="Connection properties" />
+                    <!-- Host -->
+                    <TextBlock Text="Host" />
+                    <TextBox Text="{Binding ServerName}"  Padding="2"/>
+
+                    <!-- Instance-->
+                    <TextBlock Text="Instance" />
+                    <TextBox Text="{Binding DatabaseName}" Padding="2" />
+
+                    <!-- User -->
+                    <TextBlock Text="User" />
+                    <TextBox Text="{Binding User}" Padding="2"/>
+
+                    <!-- Password-->
+                    <TextBlock Text="Password" />
+                    <TextBox Text="{Binding Password}" Padding="2"/>
+
+                    <Border Padding="0 10 0 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Margin="0 0 5 0" Grid.Column="0" Content="Connect" Command="{Binding CreateConnectionStringCommand}" />
+                            <Button Margin="5 0 0 0" Grid.Column="1" Content="Reset" />
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                
+                <!-- Connection Status -->
+                <StackPanel >
+                    <TextBlock Text="Connection status:" FontWeight="Bold" Margin="0 10"/>
+                    <TextBlock Text="{Binding ConnectionStatus}" />
+
+                    <TextBlock Text="Connection string:" FontWeight="Bold" Margin="0 10"/>
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding CreatedConnectionString}" />
+                </StackPanel>
+            </StackPanel>
+
+
+
+            <Border  Grid.Column="1" BorderThickness="5 0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Query" />
+                    <TextBox Text="{Binding QueryText}" Height="100"/>
+                    <StackPanel Margin="0 5" Orientation="Horizontal">
+                        <TextBlock Text="Attack counter [ms]" />
+                        <TextBlock  Margin="5 0" Text="{Binding Interval}"/>
+                    </StackPanel>
+
+                    <Slider Margin="0 5" Value="{Binding Interval}" Maximum="1000"></Slider>
+                    <Button Content="Start Attack" Command="{Binding ExecuteCommand}"/>
+                    <TextBlock Text="{Binding executedCounter}" />
+                    <TextBlock Text="{Binding attackStatus.AttackCounter}" />
+                    <ListBox x:Name="listThreads"></ListBox>
+                </StackPanel>
+            </Border>
+
+
+
+        </Grid>
+    </Border>
+</Window>
