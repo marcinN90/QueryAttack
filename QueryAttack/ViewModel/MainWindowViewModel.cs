@@ -60,17 +60,7 @@ namespace QueryAttack.ViewModel
             }
             if (conn.State == ConnectionState.Open)
             {
-                MessageBox.Show("Connected");
-
-                //   conn.Open();
-                //  SqlCommand cmd = new SqlCommand(sql, conn);
-                // object result = (object)comm.ExecuteScalar();
-                for (int i = 0; i < 20; i++)
-                {
-                    Thread t = new Thread(attackStart);
-                    t.Start();
-                }       
-
+                attackStart();   
             }
             MessageBox.Show(QueryText);
         }
@@ -117,7 +107,6 @@ namespace QueryAttack.ViewModel
             }
             if (conn.State == ConnectionState.Open)
             {
-                MessageBox.Show("Connected");
                 connProperties.ConnectionStatus = "Connnected";
             }
             //if (conn.State == ConnectionState.Closed)
@@ -130,24 +119,18 @@ namespace QueryAttack.ViewModel
         public MainWindowViewModel()
         {
             _attackStatus  = new AttackStatus();
-            // attackStatus.CounterOfCompletedQueries = 0;
             _connProperties = new ConnectionProperties();
             _connProperties.ConnectionStatus = "Not Connected";
+            _attackProperties = new AttackProperties();
 
             query = new AttackProperties();            
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(CreateConnectionString, () => true);
 
-            //ServerName = "192.168.3.151";
-            //DatabaseName = "alvikstorn";
-            //User = "sa";
-            //Password = "daspeab4";
-
             connProperties.ServerName = @"DESKTOP-SLEAS3V\SQL2014";
-            connProperties.DatabaseName = "CSiiii";
+            connProperties.DatabaseName = "CS";
             connProperties.User = "sa";
             connProperties.Password = "maca2bra";
-
         }
 
         public string CreatedConnectionString
@@ -176,11 +159,7 @@ namespace QueryAttack.ViewModel
             }
         }
 
-        public ConnectionProperties connString = new ConnectionProperties();
-
-
-
-        
+        public ConnectionProperties connString = new ConnectionProperties();        
 
         public event PropertyChangedEventHandler PropertyChanged;
 

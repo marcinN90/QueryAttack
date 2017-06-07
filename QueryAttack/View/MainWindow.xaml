@@ -34,11 +34,11 @@
 
                     <!-- User -->
                     <TextBlock Text="User" />
-                    <TextBox Text="{Binding User}" Padding="2"/>
+                    <TextBox Text="{Binding connProperties.User}" Padding="2"/>
 
                     <!-- Password-->
                     <TextBlock Text="Password" />
-                    <TextBox Text="{Binding Password}" Padding="2"/>
+                    <TextBox Text="{Binding connProperties.Password}" Padding="2"/>
 
                     <Border Padding="0 10 0 0">
                         <Grid>
@@ -68,15 +68,14 @@
             <Border  Grid.Column="1" BorderThickness="5 0">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Query" />
-                    <TextBox Text="{Binding QueryText}" Height="100"/>
+                    <TextBox Text="{Binding attackProperties.QueryText}" Height="100"/>
                     <StackPanel Margin="0 5" Orientation="Horizontal">
                         <TextBlock Text="Attack counter [ms]" />
-                        <TextBlock  Margin="5 0" Text="{Binding Interval}"/>
+                        <TextBlock  Margin="5 0" Text="{Binding attackProperties.QuantityOfQueriesToExecute}"/>
                     </StackPanel>
 
-                    <Slider Margin="0 5" Value="{Binding Interval}" Maximum="1000"></Slider>
+                    <Slider Margin="0 5" Value="{Binding attackProperties.QuantityOfQueriesToExecute}" Maximum="1000"></Slider>
                     <Button Content="Start Attack" Command="{Binding ExecuteCommand}"/>
-                    <TextBlock Text="{Binding executedCounter}" />
                     <TextBlock Text="{Binding attackStatus.CounterOfCompletedQueries}" />
                     <ListBox x:Name="listThreads"></ListBox>
                 </StackPanel>
