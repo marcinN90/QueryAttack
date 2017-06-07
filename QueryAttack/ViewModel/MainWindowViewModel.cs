@@ -15,7 +15,7 @@ namespace QueryAttack.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public AttackStatus _attackStatus;
+        private AttackStatus _attackStatus;
         public AttackStatus attackStatus
         {
             get
@@ -32,7 +32,16 @@ namespace QueryAttack.ViewModel
                 return _connProperties;
             }
         }
-         
+
+        private AttackProperties _attackProperties;
+        public AttackProperties attackProperties
+        {
+            get
+            {
+                return _attackProperties;
+            }
+        }
+
         public ICommand ExecuteCommand { get; }
         public ICommand CreateConnectionStringCommand { get; }
         
@@ -68,11 +77,10 @@ namespace QueryAttack.ViewModel
 
         public void attackStart()
         {
-            for (int i = 0; i < Interval; i++)
+            for (int i = 0; i < attackProperties.QuantityOfQueriesToExecute; i++)
             {
                 SqlCommand comm = new SqlCommand(QueryText, conn);
                 comm.ExecuteNonQuery();
-                executedCounter = i;
                 _attackStatus.CounterOfCompletedQueries += 1;
             }
         }
@@ -106,7 +114,6 @@ namespace QueryAttack.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                MessageBox.Show(Interval + ServerName + DatabaseName + User + Password);   
             }
             if (conn.State == ConnectionState.Open)
             {
@@ -118,20 +125,8 @@ namespace QueryAttack.ViewModel
 
         }
 
-        private int _executedCounter;
-        public int executedCounter
-        {
-            get
-            {
-                return _executedCounter;
-            }
-            set
-            {
-                _executedCounter = value;
-                OnPropertyChanged("executedCounter");
-            }
-        }
-        private Query query;
+
+        private AttackProperties query;
         public MainWindowViewModel()
         {
             _attackStatus  = new AttackStatus();
@@ -139,9 +134,7 @@ namespace QueryAttack.ViewModel
             _connProperties = new ConnectionProperties();
             _connProperties.ConnectionStatus = "Not Connected";
 
-            query = new Query();
-            this.Interval = 10;
-            executedCounter = 0;
+            query = new AttackProperties();            
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(CreateConnectionString, () => true);
 
@@ -150,73 +143,11 @@ namespace QueryAttack.ViewModel
             //User = "sa";
             //Password = "daspeab4";
 
-            ServerName = @"DESKTOP-SLEAS3V\SQL2014";
-            DatabaseName = "CS";
-            User = "sa";
-            Password = "maca2bra";
+            connProperties.ServerName = @"DESKTOP-SLEAS3V\SQL2014";
+            connProperties.DatabaseName = "CSiiii";
+            connProperties.User = "sa";
+            connProperties.Password = "maca2bra";
 
-        }
-        public int Interval
-        {
-            get
-            {
-               return query.Interval;
-            }
-            set
-            {
-                query.Interval = value;
-                OnPropertyChanged("Interval");
-            }
-        }
-
-        
-        public string ServerName
-        {
-            get
-            {
-                return connString.ServerName;
-            }
-            set
-            {
-                connString.ServerName = value;
-                OnPropertyChanged("ServerName");
-            }
-        }
-        public string DatabaseName
-        {
-            get
-            {
-                return connString.DatabaseName;
-            }
-            set
-            {
-                connString.DatabaseName = value;
-                OnPropertyChanged("DatabaseName");
-            }
-        }
-        public string User
-        {
-            get
-            {
-                return connString.User;
-            }
-            set
-            {
-                connString.User = value;
-                OnPropertyChanged("User");
-            }
-        }
-        public string Password
-        {
-            get
-            {
-                return connString.Password;
-            }
-            set
-            {
-                connString.Password = value;
-                OnPropertyChanged("Password");
-            }
         }
 
         public string CreatedConnectionString
@@ -227,7 +158,7 @@ namespace QueryAttack.ViewModel
             }
             set
             {
-                connString.getConnectionString = String.Format("Data Source={0};Initial Catalog ={1}, User ID={2}; Password ={3}; Trusted_Connection=False", connString.ServerName, DatabaseName, User, Password); ;
+                connString.getConnectionString = String.Format("Data Source={0};Initial Catalog ={1}, User ID={2}; Password ={3}; Trusted_Connection=False", connProperties.ServerName, connProperties.DatabaseName, connProperties.User, connProperties.Password); ;
                 OnPropertyChanged("CreatedConnectionString");
             }
         }

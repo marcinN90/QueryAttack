@@ -26,11 +26,11 @@
                                 Text="Connection properties" />
                     <!-- Host -->
                     <TextBlock Text="Host" />
-                    <TextBox Text="{Binding ServerName}"  Padding="2"/>
+                    <TextBox Text="{Binding connProperties.ServerName}"  Padding="2"/>
 
                     <!-- Instance-->
                     <TextBlock Text="Instance" />
-                    <TextBox Text="{Binding DatabaseName}" Padding="2" />
+                    <TextBox Text="{Binding connProperties.DatabaseName}" Padding="2" />
 
                     <!-- User -->
                     <TextBlock Text="User" />

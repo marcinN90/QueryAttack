@@ -36,10 +36,47 @@ namespace QueryAttack.Model
                 OnPropertyChanged("ConnectionStatus");
             }
         }
+        private string _DatabaseName;
+        public string DatabaseName
+        {
+            get
+            {
+                return _DatabaseName;
+            }
+            set
+            {
+                _DatabaseName = value;
+                OnPropertyChanged("DatabaseName");
+            }
+        }
 
-        public string DatabaseName { get; set; }
-        public string User { get; set; }
-        public string Password { get; set; }
+        private string _User { get; set; }
+        public string User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                _User = value;
+                OnPropertyChanged("User");
+            }
+        }
+
+        private string _Password { get; set; }
+        public string Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                _Password = value;
+                OnPropertyChanged("Password");
+            }
+        }
         public string getConnectionString { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
