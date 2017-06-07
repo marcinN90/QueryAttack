@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,8 +77,23 @@ namespace QueryAttack.Model
                 _Password = value;
                 OnPropertyChanged("Password");
             }
-        }
-        public string getConnectionString { get; set; }
+        }  
+
+        public SqlConnectionStringBuilder buildConnString = new SqlConnectionStringBuilder();
+
+        //testy
+        //buildConnString.DataSource = "192.168.3.151";
+        //buildConnString.InitialCatalog = "alvikstorn";
+        //buildConnString.IntegratedSecurity = false;
+        //buildConnString.UserID = "sa";
+        //buildConnString.Password = "daspeab4";
+        //QueryText = "select count(*) from analyzesensorslog";
+
+        //buildConnString.DataSource = ServerName;
+            //buildConnString.InitialCatalog = connProperties.DatabaseName;
+            //buildConnString.IntegratedSecurity = false;
+            //buildConnString.UserID = connProperties.User;
+            //buildConnString.Password = connProperties.Password;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string Name)

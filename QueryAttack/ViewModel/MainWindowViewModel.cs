@@ -62,21 +62,19 @@ namespace QueryAttack.ViewModel
             {
                 attackStart();   
             }
-            MessageBox.Show(QueryText);
         }
 
         public void attackStart()
         {
             for (int i = 0; i < attackProperties.QuantityOfQueriesToExecute; i++)
             {
-                SqlCommand comm = new SqlCommand(QueryText, conn);
+                SqlCommand comm = new SqlCommand(_attackProperties.QueryText, conn);
                 comm.ExecuteNonQuery();
                 _attackStatus.CounterOfCompletedQueries += 1;
             }
         }
         public void CreateConnectionString()
         {
-            CreatedConnectionString = connString.getConnectionString;
             SqlConnectionStringBuilder buildConnString = new SqlConnectionStringBuilder();
 
             //testy
@@ -87,12 +85,11 @@ namespace QueryAttack.ViewModel
             //buildConnString.Password = "daspeab4";
             //QueryText = "select count(*) from analyzesensorslog";
 
-            buildConnString.DataSource = @"DESKTOP-SLEAS3V\SQL2014";
-            buildConnString.InitialCatalog = "CS";
+            buildConnString.DataSource = connProperties.ServerName;
+            buildConnString.InitialCatalog = connProperties.DatabaseName;
             buildConnString.IntegratedSecurity = false;
-            buildConnString.UserID = "sa";
-            buildConnString.Password = "maca2bra";
-            QueryText = "select @@VERSION";
+            buildConnString.UserID = connProperties.User;
+            buildConnString.Password = connProperties.Password;
 
 
               //SqlConnection conn = new SqlConnection(connString.getConnectionString);
@@ -109,21 +106,16 @@ namespace QueryAttack.ViewModel
             {
                 connProperties.ConnectionStatus = "Connnected";
             }
-            //if (conn.State == ConnectionState.Closed)
-            //    MessageBox.Show("Closed");
-
         }
-
-
-        private AttackProperties query;
+        
         public MainWindowViewModel()
         {
             _attackStatus  = new AttackStatus();
             _connProperties = new ConnectionProperties();
             _connProperties.ConnectionStatus = "Not Connected";
             _attackProperties = new AttackProperties();
-
-            query = new AttackProperties();            
+            _attackProperties.QueryText = @"SELECT @@VERSION";
+                     
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(CreateConnectionString, () => true);
 
@@ -131,35 +123,7 @@ namespace QueryAttack.ViewModel
             connProperties.DatabaseName = "CS";
             connProperties.User = "sa";
             connProperties.Password = "maca2bra";
-        }
-
-        public string CreatedConnectionString
-        {
-            get
-            {
-                return connString.getConnectionString;
-            }
-            set
-            {
-                connString.getConnectionString = String.Format("Data Source={0};Initial Catalog ={1}, User ID={2}; Password ={3}; Trusted_Connection=False", connProperties.ServerName, connProperties.DatabaseName, connProperties.User, connProperties.Password); ;
-                OnPropertyChanged("CreatedConnectionString");
-            }
-        }
-
-        public string QueryText
-        {
-            get
-            {
-                return query.QueryText;
-            }
-            set
-            {
-                query.QueryText = value;
-                OnPropertyChanged("QueryText");
-            }
-        }
-
-        public ConnectionProperties connString = new ConnectionProperties();        
+        }       
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -64,7 +64,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\AttackStatus.cs" />
-    <Compile Include="Model\Connection.cs" />
     <Compile Include="Model\ConnectionProperties.cs" />
     <Compile Include="Model\AttackProperties.cs" />
     <Compile Include="ViewModel\CommandHandler.cs" />
