@@ -42,3 +42,4 @@ D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\View\MainWindow.b
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.g.resources
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.Properties.Resources.resources
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.csproj.GenerateResource.Cache
+D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.csprojResolveAssemblyReference.cache

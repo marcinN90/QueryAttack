@@ -91,8 +91,9 @@ namespace QueryAttack.ViewModel
             buildConnString.UserID = connProperties.User;
             buildConnString.Password = connProperties.Password;
 
+            attackProperties.QueryText= buildConnString.ConnectionString.ToString();
 
-              //SqlConnection conn = new SqlConnection(connString.getConnectionString);
+            
               conn = new SqlConnection(buildConnString.ConnectionString);
             try
             {

@@ -77,10 +77,25 @@ namespace QueryAttack.Model
                 _Password = value;
                 OnPropertyChanged("Password");
             }
-        }  
+        }
 
-        public SqlConnectionStringBuilder buildConnString = new SqlConnectionStringBuilder();
-
+        private SqlConnectionStringBuilder _ConnectionString;
+        public SqlConnectionStringBuilder ConnectionString
+        {
+            get
+            {
+                return _ConnectionString;
+            }
+        }
+        public void SetConnectionString()
+        {
+            _ConnectionString.DataSource = ServerName;
+            _ConnectionString.InitialCatalog = DatabaseName;
+            _ConnectionString.IntegratedSecurity = false;
+            _ConnectionString.UserID = User;
+            _ConnectionString.Password = Password;
+            OnPropertyChanged("ConnectionString");
+        }
         //testy
         //buildConnString.DataSource = "192.168.3.151";
         //buildConnString.InitialCatalog = "alvikstorn";
@@ -88,12 +103,6 @@ namespace QueryAttack.Model
         //buildConnString.UserID = "sa";
         //buildConnString.Password = "daspeab4";
         //QueryText = "select count(*) from analyzesensorslog";
-
-        //buildConnString.DataSource = ServerName;
-            //buildConnString.InitialCatalog = connProperties.DatabaseName;
-            //buildConnString.IntegratedSecurity = false;
-            //buildConnString.UserID = connProperties.User;
-            //buildConnString.Password = connProperties.Password;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string Name)
