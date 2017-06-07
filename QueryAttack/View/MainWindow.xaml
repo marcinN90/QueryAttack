@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QueryAttack"
         xmlns:vm="clr-namespace:QueryAttack.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="700">
+        Title="MainWindow" Height="297" Width="700">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="viewModel" />
     </Window.Resources>
@@ -25,11 +25,11 @@
                     <TextBlock Margin="0 5" FontWeight="Bold"
                                 Text="Connection properties" />
                     <!-- Host -->
-                    <TextBlock Text="Host" />
+                    <TextBlock Text="Host/Instance" />
                     <TextBox Text="{Binding connProperties.ServerName}"  Padding="2"/>
 
                     <!-- Instance-->
-                    <TextBlock Text="Instance" />
+                    <TextBlock Text="Dtabase" />
                     <TextBox Text="{Binding connProperties.DatabaseName}" Padding="2" />
 
                     <!-- User -->
@@ -55,7 +55,7 @@
                 
                 <!-- Connection Status -->
                 <StackPanel >
-                    <TextBlock Text="Connection status:" FontWeight="Bold" Margin="0 10"/>
+                    <TextBlock Text="Connection status:" FontWeight="Bold" Margin="0 10 0 0"/>
                     <TextBlock Text="{Binding connProperties.ConnectionStatus}" />
                 </StackPanel>
             </StackPanel>
@@ -66,15 +66,15 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Query" />
                     <TextBox Text="{Binding attackProperties.QueryText}" Height="100"/>
-                    <StackPanel Margin="0 5" Orientation="Horizontal">
-                        <TextBlock Text="Attack counter [ms]" />
+                    <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                        <TextBlock Text="Queries to execute: " />
                         <TextBlock  Margin="5 0" Text="{Binding attackProperties.QuantityOfQueriesToExecute}"/>
                     </StackPanel>
 
                     <Slider Margin="0 5" Value="{Binding attackProperties.QuantityOfQueriesToExecute}" Maximum="1000"></Slider>
                     <Button Content="Start Attack" Command="{Binding ExecuteCommand}"/>
+                    <TextBlock Margin="0 10" Text="Executed: " />
                     <TextBlock Text="{Binding attackStatus.CounterOfCompletedQueries}" />
-                    <ListBox x:Name="listThreads"></ListBox>
                 </StackPanel>
             </Border>
 
