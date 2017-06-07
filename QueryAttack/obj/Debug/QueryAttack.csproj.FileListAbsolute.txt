@@ -33,7 +33,6 @@ D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.exe
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.pdb
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\bin\Debug\QueryAttack.exe
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\bin\Debug\QueryAttack.pdb
-D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\QueryAttack.csprojResolveAssemblyReference.cache
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\View\MainWindow.g.cs
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\App.g.cs
 D:\DEV\BitBucket\QueryAttack\QueryAttack\QueryAttack\obj\Debug\GeneratedInternalTypeHelper.g.cs

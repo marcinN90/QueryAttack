@@ -16,8 +16,7 @@ namespace QueryAttack.ViewModel
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         public AttackStatus _attackStatus;
-
-        public  AttackStatus attackStatus
+        public AttackStatus attackStatus
         {
             get
             {
@@ -25,11 +24,18 @@ namespace QueryAttack.ViewModel
             }
         }
 
-
-
+        private ConnectionProperties _connProperties;
+        public ConnectionProperties connProperties
+        {
+            get
+            {
+                return _connProperties;
+            }
+        }
+         
         public ICommand ExecuteCommand { get; }
         public ICommand CreateConnectionStringCommand { get; }
-
+        
         SqlConnection conn;
         private void Execute()
         {          
@@ -46,8 +52,6 @@ namespace QueryAttack.ViewModel
             if (conn.State == ConnectionState.Open)
             {
                 MessageBox.Show("Connected");
-
-
 
                 //   conn.Open();
                 //  SqlCommand cmd = new SqlCommand(sql, conn);
@@ -76,16 +80,25 @@ namespace QueryAttack.ViewModel
         {
             CreatedConnectionString = connString.getConnectionString;
             SqlConnectionStringBuilder buildConnString = new SqlConnectionStringBuilder();
-            buildConnString.DataSource = "192.168.3.151";
-            buildConnString.InitialCatalog = "alvikstorn";
+
+            //testy
+            //buildConnString.DataSource = "192.168.3.151";
+            //buildConnString.InitialCatalog = "alvikstorn";
+            //buildConnString.IntegratedSecurity = false;
+            //buildConnString.UserID = "sa";
+            //buildConnString.Password = "daspeab4";
+            //QueryText = "select count(*) from analyzesensorslog";
+
+            buildConnString.DataSource = @"DESKTOP-SLEAS3V\SQL2014";
+            buildConnString.InitialCatalog = "CS";
             buildConnString.IntegratedSecurity = false;
             buildConnString.UserID = "sa";
-            buildConnString.Password = "daspeab4";
-            QueryText = "select count(*) from analyzesensorslog";
+            buildConnString.Password = "maca2bra";
+            QueryText = "select @@VERSION";
 
 
-            //SqlConnection conn = new SqlConnection(connString.getConnectionString);
-            conn = new SqlConnection(buildConnString.ConnectionString);
+              //SqlConnection conn = new SqlConnection(connString.getConnectionString);
+              conn = new SqlConnection(buildConnString.ConnectionString);
             try
             {
                 conn.Open();
@@ -96,7 +109,10 @@ namespace QueryAttack.ViewModel
                 MessageBox.Show(Interval + ServerName + DatabaseName + User + Password);   
             }
             if (conn.State == ConnectionState.Open)
+            {
                 MessageBox.Show("Connected");
+                connProperties.ConnectionStatus = "Connnected";
+            }
             //if (conn.State == ConnectionState.Closed)
             //    MessageBox.Show("Closed");
 
@@ -119,7 +135,9 @@ namespace QueryAttack.ViewModel
         public MainWindowViewModel()
         {
             _attackStatus  = new AttackStatus();
-           // attackStatus.CounterOfCompletedQueries = 0;
+            // attackStatus.CounterOfCompletedQueries = 0;
+            _connProperties = new ConnectionProperties();
+            _connProperties.ConnectionStatus = "Not Connected";
 
             query = new Query();
             this.Interval = 10;
@@ -127,10 +145,15 @@ namespace QueryAttack.ViewModel
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(CreateConnectionString, () => true);
 
-            ServerName = "192.168.3.151";
-            DatabaseName = "alvikstorn";
+            //ServerName = "192.168.3.151";
+            //DatabaseName = "alvikstorn";
+            //User = "sa";
+            //Password = "daspeab4";
+
+            ServerName = @"DESKTOP-SLEAS3V\SQL2014";
+            DatabaseName = "CS";
             User = "sa";
-            Password = "daspeab4";
+            Password = "maca2bra";
 
         }
         public int Interval

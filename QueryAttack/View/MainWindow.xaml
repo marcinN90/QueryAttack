@@ -56,7 +56,7 @@
                 <!-- Connection Status -->
                 <StackPanel >
                     <TextBlock Text="Connection status:" FontWeight="Bold" Margin="0 10"/>
-                    <TextBlock Text="{Binding ConnectionStatus}" />
+                    <TextBlock Text="{Binding connProperties.ConnectionStatus}" />
 
                     <TextBlock Text="Connection string:" FontWeight="Bold" Margin="0 10"/>
                     <TextBlock  TextWrapping="Wrap" Text="{Binding CreatedConnectionString}" />

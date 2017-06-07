@@ -22,6 +22,21 @@ namespace QueryAttack.Model
                 OnPropertyChanged("ServerName");
             }
         }
+
+        private string _ConnectionStatus;
+        public string ConnectionStatus
+        {
+            get
+            {
+                return _ConnectionStatus;
+            }
+            set
+            {
+                _ConnectionStatus = value;
+                OnPropertyChanged("ConnectionStatus");
+            }
+        }
+
         public string DatabaseName { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
