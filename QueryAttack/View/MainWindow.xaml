@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QueryAttack"
         xmlns:vm="clr-namespace:QueryAttack.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="297" Width="700">
+        Title="MainWindow" Height="302" Width="700">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="viewModel" />
     </Window.Resources>

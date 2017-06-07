@@ -1,4 +1,4 @@
-QueryAttack/obj/Debug
+**/Debug
 QueryAttack/obj/Debug/QueryAttack_MarkupCompile.i.lref
 QueryAttack/bin/Debug/QueryAttack.vshost.exe.manifest
 QueryAttack/obj/Debug/QueryAttack.csproj.FileListAbsolute.txt
@@ -10,5 +10,4 @@ QueryAttack/obj/Debug/QueryAttack.csproj.FileListAbsolute.txt
 QueryAttack/obj/Debug/View/MainWindow.baml
 QueryAttack/obj/Debug/View/MainWindow.g.cs
 QueryAttack/obj/Debug/View/MainWindow.g.i.cs
-
 QueryAttack/obj/Debug/GeneratedInternalTypeHelper.g.cs
