@@ -79,7 +79,7 @@ namespace QueryAttack.Model
             }
         }
 
-        private SqlConnectionStringBuilder _ConnectionString;
+        private SqlConnectionStringBuilder _ConnectionString = new SqlConnectionStringBuilder();
         public SqlConnectionStringBuilder ConnectionString
         {
             get
@@ -96,13 +96,6 @@ namespace QueryAttack.Model
             _ConnectionString.Password = Password;
             OnPropertyChanged("ConnectionString");
         }
-        //testy
-        //buildConnString.DataSource = "192.168.3.151";
-        //buildConnString.InitialCatalog = "alvikstorn";
-        //buildConnString.IntegratedSecurity = false;
-        //buildConnString.UserID = "sa";
-        //buildConnString.Password = "daspeab4";
-        //QueryText = "select count(*) from analyzesensorslog";
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string Name)

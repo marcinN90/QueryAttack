@@ -73,28 +73,10 @@ namespace QueryAttack.ViewModel
                 _attackStatus.CounterOfCompletedQueries += 1;
             }
         }
-        public void CreateConnectionString()
+        public void ConnectToDatabase()
         {
-            SqlConnectionStringBuilder buildConnString = new SqlConnectionStringBuilder();
-
-            //testy
-            //buildConnString.DataSource = "192.168.3.151";
-            //buildConnString.InitialCatalog = "alvikstorn";
-            //buildConnString.IntegratedSecurity = false;
-            //buildConnString.UserID = "sa";
-            //buildConnString.Password = "daspeab4";
-            //QueryText = "select count(*) from analyzesensorslog";
-
-            buildConnString.DataSource = connProperties.ServerName;
-            buildConnString.InitialCatalog = connProperties.DatabaseName;
-            buildConnString.IntegratedSecurity = false;
-            buildConnString.UserID = connProperties.User;
-            buildConnString.Password = connProperties.Password;
-
-            attackProperties.QueryText= buildConnString.ConnectionString.ToString();
-
-            
-              conn = new SqlConnection(buildConnString.ConnectionString);
+            connProperties.SetConnectionString();            
+            conn = new SqlConnection(connProperties.ConnectionString.ConnectionString);
             try
             {
                 conn.Open();
@@ -115,10 +97,10 @@ namespace QueryAttack.ViewModel
             _connProperties = new ConnectionProperties();
             _connProperties.ConnectionStatus = "Not Connected";
             _attackProperties = new AttackProperties();
-            _attackProperties.QueryText = @"SELECT @@VERSION";
+            _attackProperties.QueryText = @"SELECT @@VERSION"; //test
                      
             ExecuteCommand = new CommandHandler(Execute, () => true);
-            CreateConnectionStringCommand = new CommandHandler(CreateConnectionString, () => true);
+            CreateConnectionStringCommand = new CommandHandler(ConnectToDatabase, () => true);
 
             connProperties.ServerName = @"DESKTOP-SLEAS3V\SQL2014";
             connProperties.DatabaseName = "CS";
