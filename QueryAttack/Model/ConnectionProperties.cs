@@ -79,6 +79,14 @@ namespace QueryAttack.Model
             }
         }
 
+        public void ResetProperties ()
+        {
+            this.ServerName = string.Empty;
+            this.DatabaseName = string.Empty;
+            this.User = string.Empty;
+            this.Password = string.Empty;
+        }
+
         private SqlConnectionStringBuilder _ConnectionString = new SqlConnectionStringBuilder();
         public SqlConnectionStringBuilder ConnectionString
         {

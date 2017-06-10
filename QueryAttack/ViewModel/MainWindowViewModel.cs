@@ -41,11 +41,31 @@ namespace QueryAttack.ViewModel
                 return _attackProperties;
             }
         }
+        SqlConnection conn;
 
         public ICommand ExecuteCommand { get; }
         public ICommand CreateConnectionStringCommand { get; }
-        
-        SqlConnection conn;
+        public ICommand DisconnectAndResetCommand { get; }
+
+        public void DisconnectAndReset()
+        {
+            if (conn == null)
+            { 
+                connProperties.ResetProperties();
+                return;
+            }
+            if (conn.State == ConnectionState.Closed)
+            {
+                MessageBox.Show("Not connected to database");
+                return;
+            }
+            if (conn.State == ConnectionState.Open)
+            {
+                attackStart();
+            }
+        }
+            
+
         private void Execute()
         {          
             if (conn == null)
@@ -101,6 +121,7 @@ namespace QueryAttack.ViewModel
                      
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(ConnectToDatabase, () => true);
+            DisconnectAndResetCommand = new CommandHandler(DisconnectAndReset, () => true);
 
             connProperties.ServerName = @"DESKTOP-SLEAS3V\SQL2014";
             connProperties.DatabaseName = "CS";
