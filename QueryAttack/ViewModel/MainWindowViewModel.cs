@@ -80,12 +80,18 @@ namespace QueryAttack.ViewModel
             }
             if (conn.State == ConnectionState.Open)
             {
-                attackStart();   
+                //ThreadStart threadStart = attackStart;
+                //Thread thread = new Thread(threadStart);
+                //thread.Start();
+
+            
+               // attackStart();   
             }
         }
 
         public void attackStart()
         {
+            _attackStatus.CounterOfCompletedQueries = 0;
             for (int i = 0; i < attackProperties.QuantityOfQueriesToExecute; i++)
             {
                 SqlCommand comm = new SqlCommand(_attackProperties.QueryText, conn);

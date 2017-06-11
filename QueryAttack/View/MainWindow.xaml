@@ -71,7 +71,7 @@
                         <TextBlock  Margin="5 0" Text="{Binding attackProperties.QuantityOfQueriesToExecute}"/>
                     </StackPanel>
 
-                    <Slider Margin="0 5" Value="{Binding attackProperties.QuantityOfQueriesToExecute}" Maximum="1000"></Slider>
+                    <Slider Margin="0 5" Value="{Binding attackProperties.QuantityOfQueriesToExecute}" Maximum="100000"></Slider>
                     <Button Content="Start Attack" Command="{Binding ExecuteCommand}"/>
                     <TextBlock Margin="0 10" Text="Executed: " />
                     <TextBlock Text="{Binding attackStatus.CounterOfCompletedQueries}" />
