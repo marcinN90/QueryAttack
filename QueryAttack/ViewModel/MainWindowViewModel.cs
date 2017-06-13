@@ -56,12 +56,13 @@ namespace QueryAttack.ViewModel
             }
             if (conn.State == ConnectionState.Closed)
             {
-                MessageBox.Show("Not connected to database");
-                return;
+                connProperties.ResetProperties();
             }
             if (conn.State == ConnectionState.Open)
             {
-                attackStart();
+                conn.Close();
+                _connProperties.ConnectionStatus = "Not Connected";
+                connProperties.ResetProperties();
             }
         }
             
@@ -80,12 +81,9 @@ namespace QueryAttack.ViewModel
             }
             if (conn.State == ConnectionState.Open)
             {
-                //ThreadStart threadStart = attackStart;
-                //Thread thread = new Thread(threadStart);
-                //thread.Start();
-
-            
-               // attackStart();   
+                    ThreadStart threadStart = attackStart;
+                    Thread thread = new Thread(threadStart);
+                    thread.Start();
             }
         }
 
