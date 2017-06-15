@@ -66,7 +66,7 @@
     <Compile Include="Model\ConnectionProperties.cs" />
     <Compile Include="Model\AttackProperties.cs" />
     <Compile Include="Services\AttackService.cs" />
-    <Compile Include="Services\ConnectionsService.cs" />
+    <Compile Include="Services\ConnectionService.cs" />
     <Compile Include="Services\IAttack.cs" />
     <Compile Include="Services\IConnectionManager.cs" />
     <Compile Include="ViewModel\CommandHandler.cs" />

@@ -26,6 +26,7 @@ namespace QueryAttack.Services
 
         public void StartAttack(SqlConnection conn, int QueriesToExcecute, string QueryText)
         {
+            CounterOfCompletedQueries = 0;
             for (int i = 0; i < QueriesToExcecute; i++)
             {
                 SqlCommand command = new SqlCommand(QueryText, conn);
