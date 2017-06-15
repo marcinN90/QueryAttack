@@ -1,4 +1,5 @@
 ﻿using QueryAttack.Model;
+using QueryAttack.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +16,8 @@ namespace QueryAttack.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private AttackStatus _attackStatus;
-        public AttackStatus attackStatus
+        private Model.Attack _attackStatus;
+        public Attack attackStatus
         {
             get
             {
@@ -41,6 +42,17 @@ namespace QueryAttack.ViewModel
                 return _attackProperties;
             }
         }
+
+        private IAttack _iAttack = new AttackService();
+        public IAttack iAttack
+        {
+            get
+            {
+                return _iAttack;
+            }
+        }
+
+
         SqlConnection conn;
 
         public ICommand ExecuteCommand { get; }
@@ -50,7 +62,7 @@ namespace QueryAttack.ViewModel
         public void DisconnectAndReset()
         {
             if (conn == null)
-            { 
+            {
                 connProperties.ResetProperties();
                 return;
             }
@@ -65,10 +77,10 @@ namespace QueryAttack.ViewModel
                 connProperties.ResetProperties();
             }
         }
-            
+
 
         private void Execute()
-        {          
+        {
             if (conn == null)
             {
                 MessageBox.Show("Not connected to database");
@@ -81,25 +93,27 @@ namespace QueryAttack.ViewModel
             }
             if (conn.State == ConnectionState.Open)
             {
-                    ThreadStart threadStart = attackStart;
-                    Thread thread = new Thread(threadStart);
-                    thread.Start();
+                //  aStatus.StartAttack(ref _attackStatus.CounterOfCompletedQueries);
+                ThreadStart threadStart = attackStart;
+                Thread thread = new Thread(threadStart);
+                thread.Start();
             }
         }
 
         public void attackStart()
         {
-            _attackStatus.CounterOfCompletedQueries = 0;
+            iAttack.CounterOfCompletedQueries = 0;
+            
             for (int i = 0; i < attackProperties.QuantityOfQueriesToExecute; i++)
             {
                 SqlCommand comm = new SqlCommand(_attackProperties.QueryText, conn);
                 comm.ExecuteNonQuery();
-                _attackStatus.CounterOfCompletedQueries += 1;
+                iAttack.CounterOfCompletedQueries += 1;
             }
         }
         public void ConnectToDatabase()
         {
-            connProperties.SetConnectionString();            
+            connProperties.SetConnectionString();
             conn = new SqlConnection(connProperties.ConnectionString.ConnectionString);
             try
             {
@@ -114,15 +128,16 @@ namespace QueryAttack.ViewModel
                 connProperties.ConnectionStatus = "Connnected";
             }
         }
-        
+
         public MainWindowViewModel()
         {
-            _attackStatus  = new AttackStatus();
+            iAttack.CounterOfCompletedQueries = 0;
+            _attackStatus = new Model.Attack();
             _connProperties = new ConnectionProperties();
             _connProperties.ConnectionStatus = "Not Connected";
             _attackProperties = new AttackProperties();
             _attackProperties.QueryText = @"SELECT @@VERSION"; //test
-                     
+
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(ConnectToDatabase, () => true);
             DisconnectAndResetCommand = new CommandHandler(DisconnectAndReset, () => true);
@@ -131,14 +146,14 @@ namespace QueryAttack.ViewModel
             connProperties.DatabaseName = "CS";
             connProperties.User = "sa";
             connProperties.Password = "maca2bra";
-        }       
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged (string Name)
+        private void OnPropertyChanged(string Name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler !=null)
+            if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(Name));
             }

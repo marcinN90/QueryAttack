@@ -63,10 +63,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\AttackStatus.cs" />
+    <Compile Include="Model\Attack.cs" />
     <Compile Include="Model\ConnectionProperties.cs" />
     <Compile Include="Model\AttackProperties.cs" />
-    <Compile Include="Services\Attack.cs" />
+    <Compile Include="Services\AttackService.cs" />
     <Compile Include="Services\ConnectionsService.cs" />
     <Compile Include="Services\IAttack.cs" />
     <Compile Include="Services\IConnectionManager.cs" />

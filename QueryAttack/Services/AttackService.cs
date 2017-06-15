@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QueryAttack.Model
+namespace QueryAttack.Services
 {
-    public class AttackStatus : INotifyPropertyChanged
+    public class AttackService : IAttack, INotifyPropertyChanged
     {
         private int _CounterOfCompletedQueries;
         public int CounterOfCompletedQueries
@@ -19,7 +20,7 @@ namespace QueryAttack.Model
             set
             {
                 _CounterOfCompletedQueries = value;
-                OnPropertyChanged("CounterOfCompletedQueries");       
+                OnPropertyChanged("CounterOfCompletedQueries");
             }
         }
 
@@ -32,5 +33,6 @@ namespace QueryAttack.Model
                 handler(this, new PropertyChangedEventArgs(Name));
             }
         }
+
     }
 }

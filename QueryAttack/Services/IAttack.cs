@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace QueryAttack.Services
 {
-    interface IAttack
+    public interface IAttack
     {
-        void StartAttack();
+        int CounterOfCompletedQueries { get; set; }
+        //public int CounterOfCompletedQueries;
+        //void StartAttack();
 
-        void CancelAttack();
+        //void CancelAttack();
     }
 }
