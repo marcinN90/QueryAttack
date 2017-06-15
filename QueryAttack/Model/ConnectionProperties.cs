@@ -10,6 +10,10 @@ namespace QueryAttack.Model
 {
     public class ConnectionProperties : INotifyPropertyChanged
     {
+        public ConnectionProperties()
+        {
+            ConnectionStatus = "Not Connected";
+        }
         private string _ServerName;
         public string ServerName
         {

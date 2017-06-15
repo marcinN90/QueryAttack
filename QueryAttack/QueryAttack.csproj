@@ -63,7 +63,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Attack.cs" />
     <Compile Include="Model\ConnectionProperties.cs" />
     <Compile Include="Model\AttackProperties.cs" />
     <Compile Include="Services\AttackService.cs" />

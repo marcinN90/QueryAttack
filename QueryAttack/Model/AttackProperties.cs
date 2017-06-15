@@ -37,6 +37,10 @@ namespace QueryAttack.Model
             }
         }
 
+        public AttackProperties()
+        {
+            QuantityOfQueriesToExecute = 0;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string Name)

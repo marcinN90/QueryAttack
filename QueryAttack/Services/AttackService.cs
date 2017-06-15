@@ -24,6 +24,16 @@ namespace QueryAttack.Services
             }
         }
 
+        public void StartAttack(SqlConnection conn, int QueriesToExcecute, string QueryText)
+        {
+            for (int i = 0; i < QueriesToExcecute; i++)
+            {
+                SqlCommand command = new SqlCommand(QueryText, conn);
+                command.ExecuteNonQuery();
+                CounterOfCompletedQueries += 1;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string Name)
         {

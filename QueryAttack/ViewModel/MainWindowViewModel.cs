@@ -16,15 +16,6 @@ namespace QueryAttack.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private Model.Attack _attackStatus;
-        public Attack attackStatus
-        {
-            get
-            {
-                return _attackStatus;
-            }
-        }
-
         private ConnectionProperties _connProperties;
         public ConnectionProperties connProperties
         {
@@ -52,12 +43,52 @@ namespace QueryAttack.ViewModel
             }
         }
 
-
-        SqlConnection conn;
-
         public ICommand ExecuteCommand { get; }
         public ICommand CreateConnectionStringCommand { get; }
         public ICommand DisconnectAndResetCommand { get; }
+
+        SqlConnection conn;
+        private void Execute()
+        {
+            if (conn == null)
+            {
+                MessageBox.Show("Not connected to database");
+                return;
+            }
+            if (conn.State == ConnectionState.Closed)
+            {
+                MessageBox.Show("Not connected to database");
+                return;
+            }
+            if (conn.State == ConnectionState.Open)
+            {
+                ThreadStart threadStart = attackStart;
+                Thread thread = new Thread(threadStart);
+                thread.Start();
+            }
+        }
+
+        public void attackStart()
+        {
+            iAttack.StartAttack(conn, attackProperties.QuantityOfQueriesToExecute, attackProperties.QueryText);
+        }
+        public void ConnectToDatabase()
+        {
+            connProperties.SetConnectionString();
+            conn = new SqlConnection(connProperties.ConnectionString.ConnectionString);
+            try
+            {
+                conn.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            if (conn.State == ConnectionState.Open)
+            {
+                connProperties.ConnectionStatus = "Connnected";
+            }
+        }
 
         public void DisconnectAndReset()
         {
@@ -78,65 +109,12 @@ namespace QueryAttack.ViewModel
             }
         }
 
-
-        private void Execute()
-        {
-            if (conn == null)
-            {
-                MessageBox.Show("Not connected to database");
-                return;
-            }
-            if (conn.State == ConnectionState.Closed)
-            {
-                MessageBox.Show("Not connected to database");
-                return;
-            }
-            if (conn.State == ConnectionState.Open)
-            {
-                //  aStatus.StartAttack(ref _attackStatus.CounterOfCompletedQueries);
-                ThreadStart threadStart = attackStart;
-                Thread thread = new Thread(threadStart);
-                thread.Start();
-            }
-        }
-
-        public void attackStart()
-        {
-            iAttack.CounterOfCompletedQueries = 0;
-            
-            for (int i = 0; i < attackProperties.QuantityOfQueriesToExecute; i++)
-            {
-                SqlCommand comm = new SqlCommand(_attackProperties.QueryText, conn);
-                comm.ExecuteNonQuery();
-                iAttack.CounterOfCompletedQueries += 1;
-            }
-        }
-        public void ConnectToDatabase()
-        {
-            connProperties.SetConnectionString();
-            conn = new SqlConnection(connProperties.ConnectionString.ConnectionString);
-            try
-            {
-                conn.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            if (conn.State == ConnectionState.Open)
-            {
-                connProperties.ConnectionStatus = "Connnected";
-            }
-        }
-
         public MainWindowViewModel()
         {
-            iAttack.CounterOfCompletedQueries = 0;
-            _attackStatus = new Model.Attack();
             _connProperties = new ConnectionProperties();
-            _connProperties.ConnectionStatus = "Not Connected";
             _attackProperties = new AttackProperties();
-            _attackProperties.QueryText = @"SELECT @@VERSION"; //test
+            attackProperties.QueryText = @"SELECT @@VERSION"; //test
+            attackProperties.QuantityOfQueriesToExecute = 0;
 
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(ConnectToDatabase, () => true);
