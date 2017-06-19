@@ -29,7 +29,6 @@ namespace QueryAttack.Services
             }
             catch (Exception ex)    
             {
-                // TODO
                 return false;
             }
         }

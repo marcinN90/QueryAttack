@@ -1,14 +1,7 @@
 ﻿using QueryAttack.Model;
 using QueryAttack.Services;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -103,16 +96,17 @@ namespace QueryAttack.ViewModel
             _connProperties = new ConnectionProperties();
             _attackProperties = new AttackProperties();
             _connectionService = new ConnectionService();
-            attackProperties.QueryText = @"SELECT @@VERSION"; //test
 
-            ExecuteCommand = new CommandHandler(Execute, () => true);
-            CreateConnectionStringCommand = new CommandHandler(ConnectToDatabase, () => true);
-            DisconnectAndResetCommand = new CommandHandler(DisconnectAndReset, () => true);
-
+            //ONLY FOR TEST - DEVELOPMENT
+            attackProperties.QueryText = @"SELECT @@VERSION";
             connProperties.ServerName = @"DESKTOP-SLEAS3V\SQL2014";
             connProperties.DatabaseName = "CS";
             connProperties.User = "sa";
             connProperties.Password = "maca2bra";
+
+            ExecuteCommand = new CommandHandler(Execute, () => true);
+            CreateConnectionStringCommand = new CommandHandler(ConnectToDatabase, () => true);
+            DisconnectAndResetCommand = new CommandHandler(DisconnectAndReset, () => true);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
