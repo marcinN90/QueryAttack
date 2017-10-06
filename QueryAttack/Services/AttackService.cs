@@ -24,14 +24,23 @@ namespace QueryAttack.Services
             }
         }
 
-        public void StartAttack(SqlConnection conn, int QueriesToExcecute, string QueryText)
+        public bool StartAttack(SqlConnection conn, int QueriesToExcecute, string QueryText)
         {
-            CounterOfCompletedQueries = 0;
-            for (int i = 0; i < QueriesToExcecute; i++)
+            try
             {
-                SqlCommand command = new SqlCommand(QueryText, conn);
-                command.ExecuteNonQuery();
-                CounterOfCompletedQueries += 1;
+
+                CounterOfCompletedQueries = 0;
+                for (int i = 0; i < QueriesToExcecute; i++)
+                {
+                    SqlCommand command = new SqlCommand(QueryText, conn);
+                    command.ExecuteNonQuery();
+                    CounterOfCompletedQueries += 1;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

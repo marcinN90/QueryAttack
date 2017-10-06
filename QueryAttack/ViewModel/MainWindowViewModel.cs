@@ -2,6 +2,7 @@
 using QueryAttack.Services;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -64,9 +65,10 @@ namespace QueryAttack.ViewModel
             }
         }
 
-        public void attackStart()
+        public async Task<bool> attackStart()
         {
-            iAttack.StartAttack(connectionService.conn, attackProperties.QuantityOfQueriesToExecute, attackProperties.QueryText);
+           bool x = await iAttack.StartAttack(connectionService.conn, attackProperties.QuantityOfQueriesToExecute, attackProperties.QueryText);
+            return x;
         }
 
         public void ConnectToDatabase()
@@ -99,10 +101,10 @@ namespace QueryAttack.ViewModel
 
             //ONLY FOR TEST - DEVELOPMENT
             attackProperties.QueryText = @"SELECT @@VERSION";
-            connProperties.ServerName = @"DESKTOP-SLEAS3V\SQL2014";
+            connProperties.ServerName = @"MARCIN\SQLEXPRESS";
             connProperties.DatabaseName = "CS";
             connProperties.User = "sa";
-            connProperties.Password = "maca2bra";
+            connProperties.Password = "dastest";
 
             ExecuteCommand = new CommandHandler(Execute, () => true);
             CreateConnectionStringCommand = new CommandHandler(ConnectToDatabase, () => true);

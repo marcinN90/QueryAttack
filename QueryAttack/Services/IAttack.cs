@@ -10,6 +10,6 @@ namespace QueryAttack.Services
     public interface IAttack
     {
         int CounterOfCompletedQueries { get; set; }
-        void StartAttack(SqlConnection conn, int QueriesToExecute, string QueryText);
+        bool StartAttack(SqlConnection conn, int QueriesToExecute, string QueryText);
     }
 }
